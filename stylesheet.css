@@ -1,0 +1,26 @@
+html,body{
+    margin:0;
+    text-align: center;
+}
+*{
+    box-sizing: border-box;
+}
+h1,button, #container{
+    margin:  10px auto;
+}
+h1{
+    font-family: 'Indie Flower', cursive;
+}
+#container{
+    width: 50vh;
+    border: 2px solid red;
+    height: 50vh;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.child{
+    border: 1px solid black;
+    width:33.33%;
+    height: 33.33%;
+}
