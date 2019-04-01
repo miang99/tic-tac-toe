@@ -1,26 +1,65 @@
 html,body{
     margin:0;
     text-align: center;
+    background-image: radial-gradient(#ffff1a,#ff3333,#ff6666);
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 *{
     box-sizing: border-box;
+    font-family: 'Indie Flower', cursive;
 }
 h1,button, #container{
     margin:  10px auto;
 }
-h1{
-    font-family: 'Indie Flower', cursive;
-}
 #container{
     width: 50vh;
-    border: 2px solid red;
+    border: 2px solid white;
     height: 50vh;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
 }
-.child{
-    border: 1px solid black;
+#container div{
+    border: 3px solid black;
     width:33.33%;
     height: 33.33%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    
+}
+#container div p{
+    text-transform: uppercase;
+    font-size: 100px;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    
+    
+}
+#setupPlayer {
+    font-size: 20px;
+}
+#setupPlayer div{
+    margin : 10px auto;
+}
+input[type="submit"], button{
+    border-radius: 5px;
+    background-color: #ff0000;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 15px;
+}
+#restart{
+    display: none;
+}
+input{
+    background-color: #ffff80;
+}
+#result{
+    margin: 20px auto;
+    font-size: 20px;
+    font-weight: bold;
 }

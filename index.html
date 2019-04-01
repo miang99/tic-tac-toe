@@ -9,7 +9,17 @@
 <body>
     <!-- heading-->
     <h1>TIC TAC TOE</h1>
-    <button id="setup">Start game</button>
+    <form id="setupPlayer">
+        <div>
+            <label for="player1">Player 1:</label>
+            <input id="player1" type="text" required>
+        </div>
+        <div>
+            <label for="player2">Player 2:</label>
+            <input id="player2" type="text" required>
+        </div>
+        <input type="submit"  value="submit" id="setup" placeholder="Start">
+    </form>    
     <!-- the gaming area-->
     <div id="container">
         <div class="child" data-key="1"></div>
@@ -22,6 +32,8 @@
         <div class="child" data-key="8"></div>
         <div class="child" data-key="9"></div>
     </div>
+    <div id="result"></div>
+    <button id="restart">Restart</button>
     <script src="game.js"></script>
 
 </body>
