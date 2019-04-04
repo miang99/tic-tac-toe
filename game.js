@@ -30,12 +30,13 @@ const displayContent = (() =>{
         checking();
         console.log(winner);
         if(winner){
+            
             switch(winner){
-                case 'x': result.innerText = `${players[0].name} is winner`;
+                case 'x': result.innerText = `${players[0].name} is winner`; break;
                 case 'o': result.innerText = `${players[1].name} is winner`;
             }
             document.getElementById('restart').style.display = 'block';
-            winner = '';
+            winner = ''; i=0;
             items = ['','' ,'',
               '' , '' , '',
                 '','',''];
@@ -43,7 +44,7 @@ const displayContent = (() =>{
         }else if(i === 9){
             result.innerText = "It's tie.";
             document.getElementById('restart').style.display = 'block';
-            winner = '';
+            winner = ''; i=0;
             items = ['','' ,'',
               '' , '' , '',
                 '','',''];
@@ -98,6 +99,9 @@ const gameBoard = (() =>{
         document.getElementById('restart').style.display = 'none';
         document.getElementById('result').innerText = '';
     }
+    const computerRandom = () =>{
+        return Math.floor(Math.random()*9 +1);
+    }
     
     return {start, restart};
 })();
@@ -108,3 +112,11 @@ document.getElementById('setupPlayer').addEventListener('submit', (e)=>{
     e.target.reset(); 
 });
 document.getElementById('restart').addEventListener('click',gameBoard.restart);
+document.getElementById('single').addEventListener('click',(e) =>{
+    e.target.parentNode.style.display = 'none';
+    document.getElementById('setupSingle').style.display = 'block';
+});
+document.getElementById('double').addEventListener('click', (e) =>{
+    e.target.parentNode.style.display = 'none';
+    document.getElementById('setupPlayer').style.display = "block";
+})

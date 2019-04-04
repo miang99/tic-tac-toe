@@ -39,10 +39,11 @@ h1,button, #container{
     
     
 }
-#setupPlayer {
+#setupPlayer ,#setupSingle {
     font-size: 20px;
+    display: none;
 }
-#setupPlayer div{
+#setupPlayer div , #setupSingle div{
     margin : 10px auto;
 }
 input[type="submit"], button{
