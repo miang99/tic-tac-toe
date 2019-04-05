@@ -53,7 +53,7 @@ input[type="submit"], button{
     font-weight: bold;
     font-size: 15px;
 }
-#restart{
+#re{
     display: none;
 }
 input{
@@ -63,4 +63,7 @@ input{
     margin: 20px auto;
     font-size: 20px;
     font-weight: bold;
+}
+#score p{
+    margin: 0;
 }

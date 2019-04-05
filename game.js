@@ -6,10 +6,7 @@ let players = [];
 // set players
 const setPlayers = (name) =>{
     let score = 0;
-    const increaseScore = () =>{
-        score++;
-    }
-    return {name, score, increaseScore};
+    return {name, score};
 }
 // modules
 const displayContent = (() =>{
@@ -46,12 +43,18 @@ const displayContent = (() =>{
         checking();
         console.log(winner);
         if(winner){
-            
             switch(winner){
-                case 'x': result.innerText = `${players[0].name} is winner`; break;
+                case 'x': result.innerText = `${players[0].name} is winner`; 
+                players[0].score+=1;
+                break;
                 case 'o': result.innerText = `${players[1].name} is winner`;
+                players[1].score+=1;
             }
-            document.getElementById('restart').style.display = 'block';
+            document.getElementById('score').innerHTML=`
+            <p>${players[0].name}: ${players[1].score}</p><br>
+            <p>${players[0].name}: ${players[1].score}</p><br>
+            `
+            document.getElementById('re').style.display = 'block';
             winner = ''; i=0;
             items = ['','' ,'',
               '' , '' , '',
@@ -59,7 +62,7 @@ const displayContent = (() =>{
             removeAllEvent();
         }else if(i === 9){
             result.innerText = "It's tie.";
-            document.getElementById('restart').style.display = 'block';
+            document.getElementById('re').style.display = 'block';
             winner = ''; i=0;
             items = ['','' ,'',
               '' , '' , '',
@@ -96,28 +99,36 @@ const gameBoard = (() =>{
     const start = (player1,player2) =>{
         players[0] = setPlayers(player1);
         players[1] = setPlayers(player2);
+        console.log(players); 
+        Array.from(grids).forEach((element) =>{
+            element.addEventListener('click', displayContent.displayItem);
+            element.style.cursor = "pointer";
+        });      
+        
+        result.innerText = `${players[0].name}'s turn.`
+    }
+    const restart = () =>{
+        players = [];
+        Array.from(grids).forEach((element) =>{
+            element.innerHTML = '';
+        });
+        document.getElementById('score').innerHTML = '';
+        document.getElementById('option').style.display = 'block';
+        document.getElementById('re').style.display = 'none';
+        document.getElementById('result').innerText = '';
+    }
+    const replay = () =>{
         console.log(players);
         Array.from(grids).forEach((element) =>{
             element.addEventListener('click', displayContent.displayItem);
             element.style.cursor = "pointer";
         });
-        
-        result.innerText = `${players[0].name}'s turn.`
-    }
-    const restart = () =>{
-        
-        players = [];
-        Array.from(grids).forEach((element) =>{
-            element.innerHTML = '';
-        });
-        document.getElementById('option').style.display = 'block';
-        document.getElementById('restart').style.display = 'none';
-        document.getElementById('result').innerText = '';
+
     }
     
     
     
-    return {start, restart,};
+    return {start, restart, replay};
 })();
 //add event listeners
 document.getElementById('setupPlayer').addEventListener('submit', (e)=>{
@@ -144,3 +155,4 @@ document.getElementById('setupSingle').addEventListener('submit',(e) =>{
     e.target.reset();
     e.target.style.display = 'none';
 });
+document.getElementById('replay').addEventListener('click', gameBoard.replay);
