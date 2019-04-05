@@ -50,10 +50,11 @@ const displayContent = (() =>{
                 case 'o': result.innerText = `${players[1].name} is winner`;
                 players[1].score+=1;
             }
+            console.log(players);
             document.getElementById('score').innerHTML=`
-            <p>${players[0].name}: ${players[1].score}</p><br>
-            <p>${players[0].name}: ${players[1].score}</p><br>
-            `
+            <p>${players[0].name}: ${players[0].score}</p><br>
+            <p>${players[1].name}: ${players[1].score}</p><br>
+            `;
             document.getElementById('re').style.display = 'block';
             winner = ''; i=0;
             items = ['','' ,'',
@@ -67,6 +68,11 @@ const displayContent = (() =>{
             items = ['','' ,'',
               '' , '' , '',
                 '','',''];
+            removeAllEvent();
+            document.getElementById('score').innerHTML=`
+                <p>${players[0].name}: ${players[0].score}</p><br>
+                <p>${players[1].name}: ${players[1].score}</p><br>
+             `;
         }
         if(players[1].name == "Computer" && i!== 0) i++;
         removeEvent(e);
@@ -120,6 +126,7 @@ const gameBoard = (() =>{
     const replay = () =>{
         console.log(players);
         Array.from(grids).forEach((element) =>{
+            element.innerHTML = '';
             element.addEventListener('click', displayContent.displayItem);
             element.style.cursor = "pointer";
         });
