@@ -6,7 +6,10 @@ let players = [];
 // set players
 const setPlayers = (name) =>{
     let score = 0;
-    return {name, score};
+    const increaseScore = () =>{
+        score++;
+    }
+    return {name, score, increaseScore};
 }
 // modules
 const displayContent = (() =>{
@@ -22,6 +25,19 @@ const displayContent = (() =>{
             items[index -1] = 'x';
             e.target.innerHTML= "<p>x</p>";
             result.innerText= `${players[1].name}'s turn.`;
+            if(players[1].name === "Computer" && i<9){
+                let place = Math.floor(Math.random() * 9);
+                while(items[place] !== ""){
+                    console.log(place);
+                    place = Math.floor(Math.random() *9);
+                }
+                
+                items[place] = 'o';
+                grids[place].innerHTML =  "<p>o</p>";
+                result.innerText = `${players[0].name}'s turn.` ;
+                grids[place].removeEventListener('click', displayContent.displayItem)
+                
+            }
         } else { items[index -1] = 'o';
             e.target.innerHTML = "<p>o</p>";
             result.innerText = `${players[0].name}'s turn.`  ;      
@@ -49,9 +65,11 @@ const displayContent = (() =>{
               '' , '' , '',
                 '','',''];
         }
+        if(players[1].name == "Computer" && i!== 0) i++;
         removeEvent(e);
          
     }
+    
     const removeEvent = (e) => {
         e.target.removeEventListener('click', displayContent.displayItem);
         };
@@ -75,10 +93,7 @@ const displayContent = (() =>{
     return {displayItem};
 })();
 const gameBoard = (() =>{
-    const start = () =>{
-             
-        let player1 = document.getElementById('player1').value;
-        let player2 = document.getElementById('player2').value;
+    const start = (player1,player2) =>{
         players[0] = setPlayers(player1);
         players[1] = setPlayers(player2);
         console.log(players);
@@ -86,7 +101,7 @@ const gameBoard = (() =>{
             element.addEventListener('click', displayContent.displayItem);
             element.style.cursor = "pointer";
         });
-        document.getElementById('setupPlayer').style.display = 'none';
+        
         result.innerText = `${players[0].name}'s turn.`
     }
     const restart = () =>{
@@ -95,21 +110,23 @@ const gameBoard = (() =>{
         Array.from(grids).forEach((element) =>{
             element.innerHTML = '';
         });
-        document.getElementById('setupPlayer').style.display = 'block';
+        document.getElementById('option').style.display = 'block';
         document.getElementById('restart').style.display = 'none';
         document.getElementById('result').innerText = '';
     }
-    const computerRandom = () =>{
-        return Math.floor(Math.random()*9 +1);
-    }
     
-    return {start, restart};
+    
+    
+    return {start, restart,};
 })();
 //add event listeners
 document.getElementById('setupPlayer').addEventListener('submit', (e)=>{
+    let player1 = document.getElementById('player1').value;
+    let player2 = document.getElementById('player2').value;
     e.preventDefault();
-    gameBoard.start();
+    gameBoard.start(player1, player2);
     e.target.reset(); 
+    e.target.style.display ='none';
 });
 document.getElementById('restart').addEventListener('click',gameBoard.restart);
 document.getElementById('single').addEventListener('click',(e) =>{
@@ -119,4 +136,11 @@ document.getElementById('single').addEventListener('click',(e) =>{
 document.getElementById('double').addEventListener('click', (e) =>{
     e.target.parentNode.style.display = 'none';
     document.getElementById('setupPlayer').style.display = "block";
-})
+});
+document.getElementById('setupSingle').addEventListener('submit',(e) =>{
+    let player = document.getElementById('player').value;
+    e.preventDefault();
+    gameBoard.start(player,"Computer");
+    e.target.reset();
+    e.target.style.display = 'none';
+});
