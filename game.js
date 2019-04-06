@@ -27,13 +27,11 @@ const displayContent = (() =>{
                 while(items[place] !== ""){
                     console.log(place);
                     place = Math.floor(Math.random() *9);
-                }
-                
+                }                
                 items[place] = 'o';
                 grids[place].innerHTML =  "<p>o</p>";
                 result.innerText = `${players[0].name}'s turn.` ;
-                grids[place].removeEventListener('click', displayContent.displayItem)
-                
+                grids[place].removeEventListener('click', displayContent.displayItem)          
             }
         } else { items[index -1] = 'o';
             e.target.innerHTML = "<p>o</p>";
@@ -52,8 +50,8 @@ const displayContent = (() =>{
             }
             console.log(players);
             document.getElementById('score').innerHTML=`
-            <p>${players[0].name}: ${players[0].score}</p><br>
-            <p>${players[1].name}: ${players[1].score}</p><br>
+            <p>${players[0].name}: ${players[0].score}</p>
+            <p>${players[1].name}: ${players[1].score}</p>
             `;
             document.getElementById('re').style.display = 'block';
             winner = ''; i=0;
@@ -77,8 +75,7 @@ const displayContent = (() =>{
         if(players[1].name == "Computer" && i!== 0) i++;
         removeEvent(e);
          
-    }
-    
+    }  
     const removeEvent = (e) => {
         e.target.removeEventListener('click', displayContent.displayItem);
         };
@@ -98,7 +95,6 @@ const displayContent = (() =>{
             }            
         }
     }
-
     return {displayItem};
 })();
 const gameBoard = (() =>{
@@ -130,11 +126,7 @@ const gameBoard = (() =>{
             element.addEventListener('click', displayContent.displayItem);
             element.style.cursor = "pointer";
         });
-
     }
-    
-    
-    
     return {start, restart, replay};
 })();
 //add event listeners
