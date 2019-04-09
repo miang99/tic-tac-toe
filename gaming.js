@@ -6,7 +6,11 @@ let player1, player2;
 //set players
 const setPlayers = (name) =>{
     let score = 0;
-    return {name, score};
+    function plus(){
+        this.score++;
+        console.log(this.score);
+    }
+    return {name, score, plus};
 };
 //module patterns
 //set up the display for the game
@@ -59,10 +63,10 @@ const displayContent = (() =>{
         if(winner){
             switch(winner){
                 case 'x': result.innerText = `${player1.name} is winner`; 
-                player1.score += 1;
+                player1.plus();
                 break;
                 case 'o': result.innerText = `${player2.name} is winner`;
-                player2.score += 1;
+                player2.plus();
             }     
             removeAllEvent();  
             console.log(player1, player2); 

@@ -30,6 +30,12 @@ h1,button, #container{
     align-items: center;
     
 }
+.active{
+    cursor: pointer;
+}
+.active:hover{
+    background-color: yellowgreen;
+}
 #container div p{
     text-transform: uppercase;
     font-size: 100px;
