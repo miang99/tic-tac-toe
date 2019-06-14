@@ -97,7 +97,7 @@ const displayContent = (() =>{
         });
     }
     const resetGame = () =>{
-        i=0;
+        i=1;
         removeAllEvent();
         items = ['','' ,'',
     '' , '' , '',
